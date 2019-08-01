@@ -17,6 +17,12 @@ class App extends Component{
     .then(response => response.json())
     .then(users    =>this.setState({monsters:users}))
   }
+  //the arrow functions not needd be declared in constructor, because
+  //automatically when is compiled or interpreted set this component as scope from arrow function
+  //and we carefree for this: this.namefunction = this.namefunction.bin(this); 
+  handleChange= e =>{
+    this.setState({searchField:e.target.value})
+  }
 
   render(){
     const {monsters,searchField} = this.state;
@@ -27,7 +33,7 @@ class App extends Component{
       <div className="App">
         <SearchBox 
             placeholder='search monsters'
-            handleChange={e=>this.setState({searchField:e.target.value})}
+            handleChange={this.handleChange}
         />
         <CardList monsters={filteredMonsters}/>
       </div>
